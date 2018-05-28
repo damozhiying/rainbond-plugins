@@ -1,0 +1,22 @@
+###Linux###
+
+*~
+
+# KDE directory preferences
+.directory
+.idea
+
+###OSX###
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must ends with two \r.
+Icon
+
+# Thumbnails
+._*
+
+*.swp
+*.swo
