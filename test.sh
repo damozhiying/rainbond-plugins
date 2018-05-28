@@ -11,14 +11,16 @@ for d in $(find ./* -maxdepth 1 -type d); do
 	fi
 
 	build_dir="${d##./}"
-	iname="${d##*/}"
+
+	#iname="${d##*/}"
+	iname=$(echo ${d##./} | tr '/' '-')
 
 	(
 	set -x
-	docker build -t rainbond/${iname}:latest ${build_dir}
+	docker build -t rainbond/plugins:${iname} ${build_dir}
 	)
 
 	echo "                       ---                                   "
-	echo "Successfully built rainbond/${iname}:latest with context ${build_dir}"
+	echo "Successfully built rainbond/plugins:${iname} with context ${build_dir}"
 	echo "                       ---                                   "
 done
