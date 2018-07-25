@@ -7,7 +7,8 @@ bakhour=`date +'%H'`
 BakBin="/usr/bin/xtrabackup \
 --datadir=/data/data \
 --backup \
---throttle=1"
+--use-memory=${memory:-1G} \
+--throttle=${throttle:-10}"
 
 [ -d "$fullPath" ] || mkdir -p "$fullPath"
 [ -d "$incrPath" ] || mkdir -p "$incrPath"
@@ -28,9 +29,9 @@ function hotbackup(){
 # backup status
 function status(){
   if [ "$1" == 0 ];then
-      status_info="$(date +%F\ %H:%M) Backup complete"
+      status_info="$(date +%F\ %H:%M) Backup completed."
   else
-      status_info="$(date +%F\ %H:%M) Backup complete"
+      status_info="$(date +%F\ %H:%M) Backup not completed"
   fi
   if [ ! -z $DINGTOKEN ];then
     curl 'https://oapi.dingtalk.com/robot/send?access_token='$DINGTOKEN''  -H 'Content-Type: application/json' -d '{"msgtype": "text","text": {"content": "'"$status_info"'"}}'
